@@ -1,4 +1,4 @@
-package cosmin.dev.mobile_cv_builder.ui.screens
+package cosmin.dev.mobile_cv_builder.navigation
 
 const val MACROS_ARGUMENT_KEY = "id"
 
