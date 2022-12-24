@@ -7,6 +7,7 @@ import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.navArgument
+import cosmin.dev.mobile_cv_builder.navigation.Screen
 
 @Composable
 fun Navigation(navController: NavHostController) {
