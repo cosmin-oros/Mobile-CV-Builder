@@ -29,18 +29,11 @@ fun BasicInfoScreen(navController: NavController) {
     var name by remember {
         mutableStateOf("")
     }
+    // implement something to be able to upload photo
 
     Column(
         modifier = Modifier.fillMaxSize()
     ) {
-
-        Text(
-            modifier = Modifier
-                .padding(16.dp, top = 30.dp),
-            text = "Email",
-            color = Color.Gray,
-            fontSize = 12.sp
-        )
         OutlinedTextField(
             modifier = Modifier
                 .padding(start = 16.dp, end = 16.dp)

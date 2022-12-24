@@ -14,7 +14,8 @@ class StoreData(private val context: Context) {
         private val Context.dataStore: DataStore<Preferences> by preferencesDataStore("datastore")
         val SURNAME = stringPreferencesKey("surname")
         val NAME = stringPreferencesKey("name")
-        // create one for each field
+        // for photo
+        // preferences for each field, store multiple universities etc
     }
 
     val getSurname: Flow<String?> = context.dataStore.data
