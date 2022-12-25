@@ -34,6 +34,7 @@ fun BasicInfoScreen(navController: NavController) {
     Column(
         modifier = Modifier.fillMaxSize()
     ) {
+        // !!! make the textfields required to be completed
         OutlinedTextField(
             modifier = Modifier
                 .padding(start = 16.dp, end = 16.dp)
@@ -53,7 +54,12 @@ fun BasicInfoScreen(navController: NavController) {
             onClick = {
                 //launch the class in a coroutine scope
                 scope.launch {
+                    // store the data put into the fields
                     dataStored.saveSurname(surname)
+                    dataStored.saveName(name)
+
+                    // navigate to the next screen
+                    navController.navigate(Screen.EducationScreen.route)
                 }
             },
         ) {
