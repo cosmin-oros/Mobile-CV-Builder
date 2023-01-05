@@ -1,10 +1,12 @@
 package cosmin.dev.mobile_cv_builder.ui.screens
 
+import android.widget.GridLayout
 import androidx.compose.foundation.layout.*
-import androidx.compose.material.Button
-import androidx.compose.material.OutlinedTextField
-import androidx.compose.material.Text
+import androidx.compose.foundation.shape.CornerSize
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.*
 import androidx.compose.runtime.*
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
@@ -34,14 +36,34 @@ fun BasicInfoScreen(navController: NavController) {
     Column(
         modifier = Modifier.fillMaxSize()
     ) {
-        // !!! make the textfields required to be completed
-        OutlinedTextField(
+        Card(
             modifier = Modifier
-                .padding(start = 16.dp, end = 16.dp)
+                .padding(horizontal = 8.dp, vertical = 8.dp)
                 .fillMaxWidth(),
-            value = surname,
-            onValueChange = { surname = it },
-        )
+            elevation = 2.dp,
+            backgroundColor = Color.DarkGray,
+            shape = RoundedCornerShape(corner = CornerSize(16.dp)),
+        ) {
+            Column(
+                modifier = Modifier
+                    .padding(16.dp)
+                    .fillMaxWidth()
+                    .align(Alignment.CenterHorizontally)
+            ) {
+                Text(text = "Surname", style = MaterialTheme.typography.h5)
+
+                Spacer(modifier = Modifier.height(4.dp))
+
+                // !!! make the textfields required to be completed
+                OutlinedTextField(
+                    modifier = Modifier
+                        .padding(start = 16.dp, end = 16.dp)
+                        .fillMaxWidth(),
+                    value = surname,
+                    onValueChange = { surname = it },
+                )
+            }
+        }
 
         Spacer(modifier = Modifier.height(120.dp))
 
