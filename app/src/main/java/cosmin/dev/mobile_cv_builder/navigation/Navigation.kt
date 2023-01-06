@@ -16,27 +16,27 @@ fun Navigation(navController: NavHostController) {
              SplashScreen(navController = navController)
         }
 
-        composable(Screen.BasicInfoScreen.route + "/{name}") {
+        composable(Screen.BasicInfoScreen.route) {
              BasicInfoScreen(navController = navController)
         }
 
-        composable(Screen.EducationScreen.route + "/{name}") { entry ->
+        composable(Screen.EducationScreen.route) {
              EducationScreen(navController = navController)
         }
 
-        composable(Screen.ExperienceScreen.route + "/{name}") { entry ->
+        composable(Screen.ExperienceScreen.route) {
              ExperienceScreen(navController = navController)
         }
 
-        composable(Screen.ProjectsScreen.route + "/{name}") { entry ->
+        composable(Screen.ProjectsScreen.route) {
              ProjectsScreen(navController = navController)
         }
 
-        composable(Screen.SkillsScreen.route + "/{name}") { entry ->
+        composable(Screen.SkillsScreen.route) {
              SkillsScreen(navController = navController)
         }
 
-        composable(Screen.FinalCVScreen.route + "/{name}") { entry ->
+        composable(Screen.FinalCVScreen.route) {
              FinalCVScreen(navController = navController)
         }
     }
