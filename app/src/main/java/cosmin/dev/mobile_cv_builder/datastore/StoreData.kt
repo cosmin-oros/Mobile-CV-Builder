@@ -12,22 +12,12 @@ import kotlinx.coroutines.flow.map
 class StoreData(private val context: Context) {
     companion object {
         private val Context.dataStore: DataStore<Preferences> by preferencesDataStore("datastore")
-        val SURNAME = stringPreferencesKey("surname")
+        val EMAIL = stringPreferencesKey("email")
         val NAME = stringPreferencesKey("name")
-        // for photo
+        val PHONE = stringPreferencesKey("phone")
+
         // preferences for each field, store multiple universities etc
 
-    }
-
-    val getSurname: Flow<String?> = context.dataStore.data
-        .map { preferences ->
-            preferences[SURNAME] ?: ""
-        }
-
-    suspend fun saveSurname(name: String) {
-        context.dataStore.edit { preferences ->
-            preferences[SURNAME] = name
-        }
     }
 
     val getName: Flow<String?> = context.dataStore.data
@@ -38,6 +28,28 @@ class StoreData(private val context: Context) {
     suspend fun saveName(name: String) {
         context.dataStore.edit { preferences ->
             preferences[NAME] = name
+        }
+    }
+
+    val getEmail: Flow<String?> = context.dataStore.data
+        .map { preferences ->
+            preferences[EMAIL] ?: ""
+        }
+
+    suspend fun saveEmail(name: String) {
+        context.dataStore.edit { preferences ->
+            preferences[EMAIL] = name
+        }
+    }
+
+    val getPhone: Flow<String?> = context.dataStore.data
+        .map { preferences ->
+            preferences[PHONE] ?: ""
+        }
+
+    suspend fun savePhone(name: String) {
+        context.dataStore.edit { preferences ->
+            preferences[PHONE] = name
         }
     }
 }
