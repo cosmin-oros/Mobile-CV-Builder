@@ -18,17 +18,21 @@ import cosmin.dev.mobile_cv_builder.navigation.Screen
 import kotlinx.coroutines.launch
 
 @Composable
-fun BasicInfoScreen(navController: NavController) {
+fun BasicInfoScreen(navController: NavController, scaffoldState: ScaffoldState) {
     val context = LocalContext.current
     val scope = rememberCoroutineScope()
     val dataStored = StoreData(context)
-    val savedSurname = dataStored.getSurname.collectAsState(initial = "")
-    val savedName = dataStored.getName.collectAsState(initial = "")
+//    val savedEmail = dataStored.getEmail.collectAsState(initial = "")
+//    val savedName = dataStored.getName.collectAsState(initial = "")
+//    this is how to get the values when creating the cv at the end
 
-    var surname by remember {
+    var email by remember {
         mutableStateOf("")
     }
     var name by remember {
+        mutableStateOf("")
+    }
+    var phone by remember {
         mutableStateOf("")
     }
     // implement something to be able to upload photo
@@ -36,6 +40,14 @@ fun BasicInfoScreen(navController: NavController) {
     Column(
         modifier = Modifier.fillMaxSize()
     ) {
+        Row() {
+            Text(text = "Contact Info", style = MaterialTheme.typography.h4)
+
+            Spacer(modifier = Modifier.width(16.dp))
+            
+            Text(text = "1 out of 5", style = MaterialTheme.typography.h6)
+        }
+        
         Card(
             modifier = Modifier
                 .padding(horizontal = 8.dp, vertical = 8.dp)
@@ -44,13 +56,14 @@ fun BasicInfoScreen(navController: NavController) {
             backgroundColor = Color.DarkGray,
             shape = RoundedCornerShape(corner = CornerSize(16.dp)),
         ) {
+            // surname field
             Column(
                 modifier = Modifier
                     .padding(16.dp)
                     .fillMaxWidth()
                     .align(Alignment.CenterHorizontally)
             ) {
-                Text(text = "Surname", style = MaterialTheme.typography.h5)
+                Text(text = "Full Name", style = MaterialTheme.typography.h5)
 
                 Spacer(modifier = Modifier.height(4.dp))
 
@@ -59,11 +72,75 @@ fun BasicInfoScreen(navController: NavController) {
                     modifier = Modifier
                         .padding(start = 16.dp, end = 16.dp)
                         .fillMaxWidth(),
-                    value = surname,
-                    onValueChange = { surname = it },
+                    value = name,
+                    onValueChange = { name = it },
                 )
             }
+
         }
+
+        Card(
+            modifier = Modifier
+                .padding(horizontal = 8.dp, vertical = 8.dp)
+                .fillMaxWidth(),
+            elevation = 2.dp,
+            backgroundColor = Color.DarkGray,
+            shape = RoundedCornerShape(corner = CornerSize(16.dp)),
+        ) {
+            // email field
+            Column(
+                modifier = Modifier
+                    .padding(16.dp)
+                    .fillMaxWidth()
+                    .align(Alignment.CenterHorizontally)
+            ) {
+                Text(text = "Email", style = MaterialTheme.typography.h5)
+
+                Spacer(modifier = Modifier.height(4.dp))
+
+                // !!! make the textfields required to be completed
+                OutlinedTextField(
+                    modifier = Modifier
+                        .padding(start = 16.dp, end = 16.dp)
+                        .fillMaxWidth(),
+                    value = email,
+                    onValueChange = { email = it },
+                )
+            }
+
+        }
+
+        Card(
+            modifier = Modifier
+                .padding(horizontal = 8.dp, vertical = 8.dp)
+                .fillMaxWidth(),
+            elevation = 2.dp,
+            backgroundColor = Color.DarkGray,
+            shape = RoundedCornerShape(corner = CornerSize(16.dp)),
+        ) {
+            // phone nr field
+            Column(
+                modifier = Modifier
+                    .padding(16.dp)
+                    .fillMaxWidth()
+                    .align(Alignment.CenterHorizontally)
+            ) {
+                Text(text = "Mobile Number", style = MaterialTheme.typography.h5)
+
+                Spacer(modifier = Modifier.height(4.dp))
+
+                // !!! make the textfields required to be completed
+                OutlinedTextField(
+                    modifier = Modifier
+                        .padding(start = 16.dp, end = 16.dp)
+                        .fillMaxWidth(),
+                    value = phone,
+                    onValueChange = { phone = it },
+                )
+            }
+
+        }
+
 
         Spacer(modifier = Modifier.height(120.dp))
 
@@ -74,20 +151,27 @@ fun BasicInfoScreen(navController: NavController) {
                 .height(60.dp)
                 .padding(start = 16.dp, end = 16.dp),
             onClick = {
-                //launch the class in a coroutine scope
-                scope.launch {
-                    // store the data put into the fields
-                    dataStored.saveSurname(surname)
-                    dataStored.saveName(name)
+                if (phone != "" && email != "" && name != "") {
+                    //launch the class in a coroutine scope
+                    scope.launch {
+                        // store the data put into the fields
+                        dataStored.saveEmail(email)
+                        dataStored.saveName(name)
+                        dataStored.savePhone(phone)
 
-                    // navigate to the next screen
-                    navController.navigate(Screen.EducationScreen.route)
+                        // navigate to the next screen
+                        navController.navigate(Screen.EducationScreen.route)
+                    }
+                } else {
+                    scope.launch {
+                        scaffoldState.snackbarHostState.showSnackbar("Complete all the fields")
+                    }
                 }
             },
         ) {
             // button text
             Text(
-                text = "Save",
+                text = "Education ->",
                 color = Color.White,
                 fontSize = 18.sp
             )
