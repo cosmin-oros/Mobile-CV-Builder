@@ -15,6 +15,10 @@ class StoreData(private val context: Context) {
         val EMAIL = stringPreferencesKey("email")
         val NAME = stringPreferencesKey("name")
         val PHONE = stringPreferencesKey("phone")
+        val UNIVERSITY = stringPreferencesKey("university")
+        val FIELDOFSTUDY = stringPreferencesKey("field_of_study")
+        val SPECIALIZATION = stringPreferencesKey("specialization")
+        val GRADUATION = stringPreferencesKey("graduation")
 
         // preferences for each field, store multiple universities etc
 
@@ -50,6 +54,50 @@ class StoreData(private val context: Context) {
     suspend fun savePhone(name: String) {
         context.dataStore.edit { preferences ->
             preferences[PHONE] = name
+        }
+    }
+
+    val getUniversity: Flow<String?> = context.dataStore.data
+        .map { preferences ->
+            preferences[UNIVERSITY] ?: ""
+        }
+
+    suspend fun saveUniversity(name: String) {
+        context.dataStore.edit { preferences ->
+            preferences[UNIVERSITY] = name
+        }
+    }
+
+    val getFieldOfStudy: Flow<String?> = context.dataStore.data
+        .map { preferences ->
+            preferences[FIELDOFSTUDY] ?: ""
+        }
+
+    suspend fun saveFieldOfStudy(name: String) {
+        context.dataStore.edit { preferences ->
+            preferences[FIELDOFSTUDY] = name
+        }
+    }
+
+    val getSpecialization: Flow<String?> = context.dataStore.data
+        .map { preferences ->
+            preferences[SPECIALIZATION] ?: ""
+        }
+
+    suspend fun saveSpecialization(name: String) {
+        context.dataStore.edit { preferences ->
+            preferences[SPECIALIZATION] = name
+        }
+    }
+
+    val getGraduation: Flow<String?> = context.dataStore.data
+        .map { preferences ->
+            preferences[GRADUATION] ?: ""
+        }
+
+    suspend fun saveGraduation(name: String) {
+        context.dataStore.edit { preferences ->
+            preferences[GRADUATION] = name
         }
     }
 }
