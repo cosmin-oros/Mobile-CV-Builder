@@ -19,6 +19,10 @@ class StoreData(private val context: Context) {
         val FIELDOFSTUDY = stringPreferencesKey("field_of_study")
         val SPECIALIZATION = stringPreferencesKey("specialization")
         val GRADUATION = stringPreferencesKey("graduation")
+        val COMPANY = stringPreferencesKey("company")
+        val JOBTITLE = stringPreferencesKey("job_title")
+        val STARTDATE = stringPreferencesKey("start_date")
+        val ENDDATE = stringPreferencesKey("end_date")
 
         // preferences for each field, store multiple universities etc
 
@@ -98,6 +102,50 @@ class StoreData(private val context: Context) {
     suspend fun saveGraduation(name: String) {
         context.dataStore.edit { preferences ->
             preferences[GRADUATION] = name
+        }
+    }
+
+    val getCompany: Flow<String?> = context.dataStore.data
+        .map { preferences ->
+            preferences[COMPANY] ?: ""
+        }
+
+    suspend fun saveCompany(name: String) {
+        context.dataStore.edit { preferences ->
+            preferences[COMPANY] = name
+        }
+    }
+
+    val getJob: Flow<String?> = context.dataStore.data
+        .map { preferences ->
+            preferences[JOBTITLE] ?: ""
+        }
+
+    suspend fun saveJob(name: String) {
+        context.dataStore.edit { preferences ->
+            preferences[JOBTITLE] = name
+        }
+    }
+
+    val getStartDate: Flow<String?> = context.dataStore.data
+        .map { preferences ->
+            preferences[STARTDATE] ?: ""
+        }
+
+    suspend fun saveStartDate(name: String) {
+        context.dataStore.edit { preferences ->
+            preferences[STARTDATE] = name
+        }
+    }
+
+    val getEndDate: Flow<String?> = context.dataStore.data
+        .map { preferences ->
+            preferences[ENDDATE] ?: ""
+        }
+
+    suspend fun saveEndDate(name: String) {
+        context.dataStore.edit { preferences ->
+            preferences[ENDDATE] = name
         }
     }
 }
