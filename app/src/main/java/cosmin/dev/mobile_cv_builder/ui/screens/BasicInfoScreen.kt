@@ -10,6 +10,8 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.text.font.FontFamily
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
@@ -40,12 +42,27 @@ fun BasicInfoScreen(navController: NavController, scaffoldState: ScaffoldState) 
     Column(
         modifier = Modifier.fillMaxSize()
     ) {
-        Row() {
-            Text(text = "Contact Info", style = MaterialTheme.typography.h4)
+        Row(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(horizontal = 20.dp, vertical = 20.dp)
+        ) {
+            Row(
+                modifier = Modifier.fillMaxWidth(0.5f),
+                horizontalArrangement = Arrangement.Start
+            ) {
+                Text(text = "Contact Info", fontFamily = FontFamily.Monospace, fontSize = 20.sp)
+            }
 
-            Spacer(modifier = Modifier.width(16.dp))
-            
-            Text(text = "1 out of 5", style = MaterialTheme.typography.h6)
+
+
+            Row(
+                modifier = Modifier.fillMaxWidth(0.5f),
+                horizontalArrangement = Arrangement.End
+            ) {
+                Text(text = "1 out of 5", fontFamily = FontFamily.Monospace, fontSize = 10.sp)
+            }
+
         }
         
         Card(
