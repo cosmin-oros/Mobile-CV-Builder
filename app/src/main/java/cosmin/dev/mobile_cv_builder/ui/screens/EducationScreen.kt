@@ -173,6 +173,8 @@ fun EducationScreen(navController: NavController, scaffoldState: ScaffoldState) 
 
         }
 
+        // !!! button to add another university
+
         Spacer(modifier = Modifier.height(120.dp))
 
         // save button
