@@ -1,5 +1,7 @@
 package cosmin.dev.mobile_cv_builder.ui.screens
 
+import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CornerSize
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -7,6 +9,7 @@ import androidx.compose.material.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontFamily
@@ -185,37 +188,66 @@ fun EducationScreen(navController: NavController, scaffoldState: ScaffoldState) 
         Spacer(modifier = Modifier.height(120.dp))
 
         // save button
-        Button(
-            modifier = Modifier
-                .fillMaxWidth()
-                .height(60.dp)
-                .padding(start = 16.dp, end = 16.dp),
-            onClick = {
-                if (university != "" && fieldOfStudy != "" && specialization != "" && graduationDate != "") {
-                    //launch the class in a coroutine scope
-                    scope.launch {
-                        // store the data put into the fields
-                        dataStored.saveUniversity(university)
-                        dataStored.saveFieldOfStudy(fieldOfStudy)
-                        dataStored.saveSpecialization(specialization)
-                        dataStored.saveGraduation(graduationDate)
-
-                        // navigate to the next screen
-                        navController.navigate(Screen.ExperienceScreen.route)
-                    }
-                } else {
-                    scope.launch {
-                        scaffoldState.snackbarHostState.showSnackbar("Complete all the fields")
-                    }
-                }
-            },
+        Row(
+            modifier = Modifier.fillMaxWidth(),
+            horizontalArrangement = Arrangement.Center
         ) {
-            // button text
-            Text(
-                text = "Experience ->",
-                color = Color.White,
-                fontSize = 18.sp
-            )
+            Button(
+                colors = ButtonDefaults.buttonColors(
+                    backgroundColor = Color.Transparent,
+                    contentColor = Color.LightGray
+                ),
+                modifier = Modifier
+                    .fillMaxWidth(0.7f)
+                    .height(60.dp)
+                    .border(
+                        width = 5.dp,
+                        brush = Brush.horizontalGradient(
+                            listOf(
+                                Color.LightGray,
+                                Color.DarkGray
+                            )
+                        ),
+                        shape = RoundedCornerShape(15.dp)
+                    )
+                    .padding(start = 16.dp, end = 16.dp)
+                    .background(
+                        Brush.horizontalGradient(
+                            colors = listOf(
+                                Color.Transparent,
+                                Color.Transparent
+                            ),
+                            startX = 150f
+                        )
+                    ),
+                onClick = {
+                    if (university != "" && fieldOfStudy != "" && specialization != "" && graduationDate != "") {
+                        //launch the class in a coroutine scope
+                        scope.launch {
+                            // store the data put into the fields
+                            dataStored.saveUniversity(university)
+                            dataStored.saveFieldOfStudy(fieldOfStudy)
+                            dataStored.saveSpecialization(specialization)
+                            dataStored.saveGraduation(graduationDate)
+
+                            // navigate to the next screen
+                            navController.navigate(Screen.ExperienceScreen.route)
+                        }
+                    } else {
+                        scope.launch {
+                            scaffoldState.snackbarHostState.showSnackbar("Complete all the fields")
+                        }
+                    }
+                },
+            ) {
+                // button text
+                Text(
+                    text = "Experience ->",
+                    color = Color.White,
+                    fontSize = 18.sp
+                )
+            }
+
         }
 
     }

@@ -1,13 +1,17 @@
 package cosmin.dev.mobile_cv_builder.ui.screens
 
 import android.widget.GridLayout
+import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CornerSize
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
+import androidx.compose.material.MaterialTheme.colors
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontFamily
@@ -18,6 +22,7 @@ import androidx.navigation.NavController
 import cosmin.dev.mobile_cv_builder.datastore.StoreData
 import cosmin.dev.mobile_cv_builder.navigation.Screen
 import kotlinx.coroutines.launch
+import org.intellij.lang.annotations.JdkConstants.HorizontalAlignment
 
 @Composable
 fun BasicInfoScreen(navController: NavController, scaffoldState: ScaffoldState) {
@@ -161,36 +166,64 @@ fun BasicInfoScreen(navController: NavController, scaffoldState: ScaffoldState) 
         Spacer(modifier = Modifier.height(120.dp))
 
         // save button
-        Button(
-            modifier = Modifier
-                .fillMaxWidth()
-                .height(60.dp)
-                .padding(start = 16.dp, end = 16.dp),
-            onClick = {
-                if (phone != "" && email != "" && name != "") {
-                    //launch the class in a coroutine scope
-                    scope.launch {
-                        // store the data put into the fields
-                        dataStored.saveEmail(email)
-                        dataStored.saveName(name)
-                        dataStored.savePhone(phone)
-
-                        // navigate to the next screen
-                        navController.navigate(Screen.EducationScreen.route)
-                    }
-                } else {
-                    scope.launch {
-                        scaffoldState.snackbarHostState.showSnackbar("Complete all the fields")
-                    }
-                }
-            },
+        Row(
+            modifier = Modifier.fillMaxWidth(),
+            horizontalArrangement = Arrangement.Center
         ) {
-            // button text
-            Text(
-                text = "Education ->",
-                color = Color.White,
-                fontSize = 18.sp
-            )
+            Button(
+                colors = ButtonDefaults.buttonColors(
+                    backgroundColor = Color.Transparent,
+                    contentColor = Color.LightGray
+                ),
+                modifier = Modifier
+                    .fillMaxWidth(0.7f)
+                    .height(60.dp)
+                    .border(
+                        width = 5.dp,
+                        brush = Brush.horizontalGradient(
+                            listOf(
+                                Color.LightGray,
+                                Color.DarkGray
+                            )
+                        ),
+                        shape = RoundedCornerShape(15.dp)
+                    )
+                    .padding(start = 16.dp, end = 16.dp)
+                    .background(
+                        Brush.horizontalGradient(
+                            colors = listOf(
+                                Color.Transparent,
+                                Color.Transparent
+                            ),
+                            startX = 150f
+                        )
+                    ),
+                onClick = {
+                    if (phone != "" && email != "" && name != "") {
+                        //launch the class in a coroutine scope
+                        scope.launch {
+                            // store the data put into the fields
+                            dataStored.saveEmail(email)
+                            dataStored.saveName(name)
+                            dataStored.savePhone(phone)
+
+                            // navigate to the next screen
+                            navController.navigate(Screen.EducationScreen.route)
+                        }
+                    } else {
+                        scope.launch {
+                            scaffoldState.snackbarHostState.showSnackbar("Complete all the fields")
+                        }
+                    }
+                },
+            ) {
+                // button text
+                Text(
+                    text = "Education ->",
+                    color = Color.White,
+                    fontSize = 18.sp
+                )
+            }
         }
 
     }
