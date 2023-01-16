@@ -40,28 +40,21 @@ fun BasicInfoScreen(navController: NavController, scaffoldState: ScaffoldState) 
     // implement something to be able to upload photo
 
     Column(
-        modifier = Modifier.fillMaxSize()
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(horizontal = 20.dp, vertical = 10.dp)
     ) {
         Row(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(horizontal = 20.dp, vertical = 20.dp)
+                .padding(horizontal = 20.dp, vertical = 10.dp),
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.SpaceBetween
         ) {
-            Row(
-                modifier = Modifier.fillMaxWidth(0.5f),
-                horizontalArrangement = Arrangement.Start
-            ) {
-                Text(text = "Contact Info", fontFamily = FontFamily.Monospace, fontSize = 20.sp)
-            }
 
+            Text(text = "Contact Info", fontFamily = FontFamily.Monospace, fontSize = 20.sp)
 
-
-            Row(
-                modifier = Modifier.fillMaxWidth(0.5f),
-                horizontalArrangement = Arrangement.End
-            ) {
-                Text(text = "1 out of 5", fontFamily = FontFamily.Monospace, fontSize = 10.sp)
-            }
+            Text(text = "1 out of 5", fontFamily = FontFamily.Monospace, fontSize = 12.sp)
 
         }
         
@@ -83,6 +76,8 @@ fun BasicInfoScreen(navController: NavController, scaffoldState: ScaffoldState) 
                 Text(text = "Full Name", style = MaterialTheme.typography.h5)
 
                 Spacer(modifier = Modifier.height(4.dp))
+
+                // !!! Make sure the text contains letters
 
                 // !!! make the textfields required to be completed
                 OutlinedTextField(
@@ -115,6 +110,8 @@ fun BasicInfoScreen(navController: NavController, scaffoldState: ScaffoldState) 
 
                 Spacer(modifier = Modifier.height(4.dp))
 
+                // !!! Make sure the text contains letters
+
                 // !!! make the textfields required to be completed
                 OutlinedTextField(
                     modifier = Modifier
@@ -145,6 +142,8 @@ fun BasicInfoScreen(navController: NavController, scaffoldState: ScaffoldState) 
                 Text(text = "Mobile Number", style = MaterialTheme.typography.h5)
 
                 Spacer(modifier = Modifier.height(4.dp))
+
+                // !!! Make sure the textfield contains a valid phone number
 
                 // !!! make the textfields required to be completed
                 OutlinedTextField(

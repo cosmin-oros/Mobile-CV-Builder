@@ -9,6 +9,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
@@ -38,16 +39,22 @@ fun ExperienceScreen(navController: NavController, scaffoldState: ScaffoldState)
     // implement something to be able to upload photo
 
     Column(
-        modifier = Modifier.fillMaxSize()
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(horizontal = 20.dp, vertical = 10.dp)
     ) {
         // make a button here <- Contact Info
 
-        Row() {
-            Text(text = "Experience", style = MaterialTheme.typography.h4)
+        Row(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(horizontal = 20.dp, vertical = 10.dp),
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.SpaceBetween
+        ) {
+            Text(text = "Experience", fontFamily = FontFamily.Monospace, fontSize = 20.sp)
 
-            Spacer(modifier = Modifier.width(16.dp))
-
-            Text(text = "3 out of 5", style = MaterialTheme.typography.h6)
+            Text(text = "3 out of 5", fontFamily = FontFamily.Monospace, fontSize = 12.sp)
         }
 
         Card(
