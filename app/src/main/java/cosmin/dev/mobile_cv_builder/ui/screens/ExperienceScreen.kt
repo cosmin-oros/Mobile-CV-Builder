@@ -46,7 +46,29 @@ fun ExperienceScreen(navController: NavController, scaffoldState: ScaffoldState)
             .fillMaxSize()
             .padding(horizontal = 20.dp, vertical = 10.dp)
     ) {
-        // make a button here <- Contact Info
+        // make a button here <- Education
+        Button(
+            colors = ButtonDefaults.buttonColors(
+                backgroundColor = Color.Transparent,
+                contentColor = Color.LightGray
+            ),
+            modifier = Modifier
+                .background(
+                    Brush.horizontalGradient(
+                        colors = listOf(
+                            Color.Transparent,
+                            Color.Transparent
+                        ),
+                        startX = 150f
+                    )
+
+                ),
+            onClick = {
+                navController.navigate(Screen.EducationScreen.route)
+            }
+        ) {
+            Text(text = "<- Education")
+        }
 
         Row(
             modifier = Modifier
