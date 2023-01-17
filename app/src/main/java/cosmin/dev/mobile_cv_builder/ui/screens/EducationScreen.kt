@@ -46,6 +46,28 @@ fun EducationScreen(navController: NavController, scaffoldState: ScaffoldState) 
             .padding(horizontal = 20.dp, vertical = 10.dp)
     ) {
         // make a button here <- Contact Info
+        Button(
+            colors = ButtonDefaults.buttonColors(
+                backgroundColor = Color.Transparent,
+                contentColor = Color.LightGray
+            ),
+            modifier = Modifier
+                .background(
+                Brush.horizontalGradient(
+                    colors = listOf(
+                        Color.Transparent,
+                        Color.Transparent
+                    ),
+                    startX = 150f
+                )
+
+            ),
+            onClick = {
+                navController.navigate(Screen.BasicInfoScreen.route)
+            }
+        ) {
+            Text(text = "<- Contact Info")
+        }
 
         Row(
             modifier = Modifier
