@@ -1,5 +1,7 @@
 package cosmin.dev.mobile_cv_builder.ui.screens
 
+import android.os.Build
+import androidx.annotation.RequiresApi
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
@@ -18,27 +20,17 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import cosmin.dev.mobile_cv_builder.datastore.StoreData
 import cosmin.dev.mobile_cv_builder.navigation.Screen
+import cosmin.dev.mobile_cv_builder.ui.screens.education.EducationData
 import kotlinx.coroutines.launch
+
+val educationList = mutableListOf<EducationData>()
 
 @Composable
 fun EducationScreen(navController: NavController, scaffoldState: ScaffoldState) {
     val context = LocalContext.current
     val scope = rememberCoroutineScope()
     val dataStored = StoreData(context)
-
-    var university by remember {
-        mutableStateOf("")
-    }
-    var fieldOfStudy by remember {
-        mutableStateOf("")
-    }
-    var specialization by remember {
-        mutableStateOf("")
-    }
-    var graduationDate by remember {
-        mutableStateOf("")
-    }
-    // implement something to be able to upload photo
+    var educationNr = 0
 
     Column(
         modifier = Modifier
@@ -53,15 +45,15 @@ fun EducationScreen(navController: NavController, scaffoldState: ScaffoldState) 
             ),
             modifier = Modifier
                 .background(
-                Brush.horizontalGradient(
-                    colors = listOf(
-                        Color.Transparent,
-                        Color.Transparent
-                    ),
-                    startX = 150f
-                )
+                    Brush.horizontalGradient(
+                        colors = listOf(
+                            Color.Transparent,
+                            Color.Transparent
+                        ),
+                        startX = 150f
+                    )
 
-            ),
+                ),
             onClick = {
                 navController.navigate(Screen.BasicInfoScreen.route)
             }
@@ -81,6 +73,131 @@ fun EducationScreen(navController: NavController, scaffoldState: ScaffoldState) 
             Text(text = "2 out of 5", fontFamily = FontFamily.Monospace, fontSize = 12.sp)
         }
 
+        Button(
+            colors = ButtonDefaults.buttonColors(
+                backgroundColor = Color.Transparent,
+                contentColor = Color.LightGray
+            ),
+            modifier = Modifier
+                .fillMaxWidth(0.7f)
+                .height(60.dp)
+                .border(
+                    width = 5.dp,
+                    brush = Brush.horizontalGradient(
+                        listOf(
+                            Color.LightGray,
+                            Color.DarkGray
+                        )
+                    ),
+                    shape = RoundedCornerShape(15.dp)
+                )
+                .padding(start = 16.dp, end = 16.dp)
+                .background(
+                    Brush.horizontalGradient(
+                        colors = listOf(
+                            Color.Transparent,
+                            Color.Transparent
+                        ),
+                        startX = 150f
+                    )
+                ),
+            onClick = {
+                if (educationNr < 5) {
+                    educationList.add(EducationData(nr = educationNr))
+                    educationNr++
+                } else {
+                    scope.launch {
+                        scaffoldState.snackbarHostState.showSnackbar("Too many added")
+                    }
+                }
+            },
+        ) {
+            // button text
+            Text(
+                text = "Add Education",
+                color = Color.White,
+                fontSize = 18.sp
+            )
+        }
+
+        educationList.forEach { education ->
+            EducationFields(education, navController, scaffoldState)
+        }
+
+        Spacer(modifier = Modifier.height(120.dp))
+
+        // save button
+        Row(
+            modifier = Modifier.fillMaxWidth(),
+            horizontalArrangement = Arrangement.Center
+        ) {
+            Button(
+                colors = ButtonDefaults.buttonColors(
+                    backgroundColor = Color.Transparent,
+                    contentColor = Color.LightGray
+                ),
+                modifier = Modifier
+                    .fillMaxWidth(0.7f)
+                    .height(60.dp)
+                    .border(
+                        width = 5.dp,
+                        brush = Brush.horizontalGradient(
+                            listOf(
+                                Color.LightGray,
+                                Color.DarkGray
+                            )
+                        ),
+                        shape = RoundedCornerShape(15.dp)
+                    )
+                    .padding(start = 16.dp, end = 16.dp)
+                    .background(
+                        Brush.horizontalGradient(
+                            colors = listOf(
+                                Color.Transparent,
+                                Color.Transparent
+                            ),
+                            startX = 150f
+                        )
+                    ),
+                onClick = {
+                    scope.launch {
+                        navController.navigate(Screen.ExperienceScreen.route)
+                    }
+                },
+            ) {
+                // button text
+                Text(
+                    text = "Experience ->",
+                    color = Color.White,
+                    fontSize = 18.sp
+                )
+            }
+
+        }
+    }
+}
+
+@Composable
+fun EducationFields(educationData: EducationData, navController: NavController, scaffoldState: ScaffoldState) {
+    var university by remember {
+        mutableStateOf("")
+    }
+    var fieldOfStudy by remember {
+        mutableStateOf("")
+    }
+    var specialization by remember {
+        mutableStateOf("")
+    }
+    var graduationDate by remember {
+        mutableStateOf("")
+    }
+    val context = LocalContext.current
+    val scope = rememberCoroutineScope()
+    val dataStored = StoreData(context)
+
+    Column(
+
+    ) {
         Card(
             modifier = Modifier
                 .padding(horizontal = 8.dp, vertical = 8.dp)
@@ -205,10 +322,6 @@ fun EducationScreen(navController: NavController, scaffoldState: ScaffoldState) 
 
         }
 
-        // !!! button to add another university
-
-        Spacer(modifier = Modifier.height(120.dp))
-
         // save button
         Row(
             modifier = Modifier.fillMaxWidth(),
@@ -247,13 +360,39 @@ fun EducationScreen(navController: NavController, scaffoldState: ScaffoldState) 
                         //launch the class in a coroutine scope
                         scope.launch {
                             // store the data put into the fields
-                            dataStored.saveUniversity(university)
-                            dataStored.saveFieldOfStudy(fieldOfStudy)
-                            dataStored.saveSpecialization(specialization)
-                            dataStored.saveGraduation(graduationDate)
+                            when (educationData.nr) {
+                                0 -> {
+                                    dataStored.saveUniversity1(university)
+                                    dataStored.saveFieldOfStudy1(fieldOfStudy)
+                                    dataStored.saveSpecialization1(specialization)
+                                    dataStored.saveGraduation1(graduationDate)
+                                }
+                                1 -> {
+                                    dataStored.saveUniversity2(university)
+                                    dataStored.saveFieldOfStudy2(fieldOfStudy)
+                                    dataStored.saveSpecialization2(specialization)
+                                    dataStored.saveGraduation2(graduationDate)
+                                }
+                                2 -> {
+                                    dataStored.saveUniversity3(university)
+                                    dataStored.saveFieldOfStudy3(fieldOfStudy)
+                                    dataStored.saveSpecialization3(specialization)
+                                    dataStored.saveGraduation3(graduationDate)
+                                }
+                                3 -> {
+                                    dataStored.saveUniversity4(university)
+                                    dataStored.saveFieldOfStudy4(fieldOfStudy)
+                                    dataStored.saveSpecialization4(specialization)
+                                    dataStored.saveGraduation4(graduationDate)
+                                }
+                                4 -> {
+                                    dataStored.saveUniversity5(university)
+                                    dataStored.saveFieldOfStudy5(fieldOfStudy)
+                                    dataStored.saveSpecialization5(specialization)
+                                    dataStored.saveGraduation5(graduationDate)
+                                }
+                            }
 
-                            // navigate to the next screen
-                            navController.navigate(Screen.ExperienceScreen.route)
                         }
                     } else {
                         scope.launch {
@@ -264,13 +403,12 @@ fun EducationScreen(navController: NavController, scaffoldState: ScaffoldState) 
             ) {
                 // button text
                 Text(
-                    text = "Experience ->",
+                    text = "Save",
                     color = Color.White,
                     fontSize = 18.sp
                 )
             }
 
         }
-
     }
 }

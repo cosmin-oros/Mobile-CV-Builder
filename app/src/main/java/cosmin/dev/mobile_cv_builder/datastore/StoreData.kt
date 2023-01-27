@@ -15,10 +15,32 @@ class StoreData(private val context: Context) {
         val EMAIL = stringPreferencesKey("email")
         val NAME = stringPreferencesKey("name")
         val PHONE = stringPreferencesKey("phone")
-        val UNIVERSITY = stringPreferencesKey("university")
-        val FIELDOFSTUDY = stringPreferencesKey("field_of_study")
-        val SPECIALIZATION = stringPreferencesKey("specialization")
-        val GRADUATION = stringPreferencesKey("graduation")
+
+        val UNIVERSITY1 = stringPreferencesKey("university1")
+        val FIELDOFSTUDY1 = stringPreferencesKey("field_of_study1")
+        val SPECIALIZATION1 = stringPreferencesKey("specialization1")
+        val GRADUATION1 = stringPreferencesKey("graduation1")
+
+        val UNIVERSITY2 = stringPreferencesKey("university2")
+        val FIELDOFSTUDY2 = stringPreferencesKey("field_of_study2")
+        val SPECIALIZATION2 = stringPreferencesKey("specialization2")
+        val GRADUATION2 = stringPreferencesKey("graduation2")
+
+        val UNIVERSITY3 = stringPreferencesKey("university3")
+        val FIELDOFSTUDY3 = stringPreferencesKey("field_of_study3")
+        val SPECIALIZATION3 = stringPreferencesKey("specialization3")
+        val GRADUATION3 = stringPreferencesKey("graduation3")
+
+        val UNIVERSITY4 = stringPreferencesKey("university4")
+        val FIELDOFSTUDY4 = stringPreferencesKey("field_of_study4")
+        val SPECIALIZATION4 = stringPreferencesKey("specialization4")
+        val GRADUATION4 = stringPreferencesKey("graduation4")
+
+        val UNIVERSITY5 = stringPreferencesKey("university5")
+        val FIELDOFSTUDY5 = stringPreferencesKey("field_of_study5")
+        val SPECIALIZATION5 = stringPreferencesKey("specialization5")
+        val GRADUATION5 = stringPreferencesKey("graduation5")
+
         val COMPANY = stringPreferencesKey("company")
         val JOBTITLE = stringPreferencesKey("job_title")
         val STARTDATE = stringPreferencesKey("start_date")
@@ -61,47 +83,223 @@ class StoreData(private val context: Context) {
         }
     }
 
-    val getUniversity: Flow<String?> = context.dataStore.data
+    val getUniversity1: Flow<String?> = context.dataStore.data
         .map { preferences ->
-            preferences[UNIVERSITY] ?: ""
+            preferences[UNIVERSITY1] ?: ""
         }
 
-    suspend fun saveUniversity(name: String) {
+    suspend fun saveUniversity1(name: String) {
         context.dataStore.edit { preferences ->
-            preferences[UNIVERSITY] = name
+            preferences[UNIVERSITY1] = name
         }
     }
 
-    val getFieldOfStudy: Flow<String?> = context.dataStore.data
+    val getFieldOfStudy1: Flow<String?> = context.dataStore.data
         .map { preferences ->
-            preferences[FIELDOFSTUDY] ?: ""
+            preferences[FIELDOFSTUDY1] ?: ""
         }
 
-    suspend fun saveFieldOfStudy(name: String) {
+    suspend fun saveFieldOfStudy1(name: String) {
         context.dataStore.edit { preferences ->
-            preferences[FIELDOFSTUDY] = name
+            preferences[FIELDOFSTUDY1] = name
         }
     }
 
-    val getSpecialization: Flow<String?> = context.dataStore.data
+    val getSpecialization1: Flow<String?> = context.dataStore.data
         .map { preferences ->
-            preferences[SPECIALIZATION] ?: ""
+            preferences[SPECIALIZATION1] ?: ""
         }
 
-    suspend fun saveSpecialization(name: String) {
+    suspend fun saveSpecialization1(name: String) {
         context.dataStore.edit { preferences ->
-            preferences[SPECIALIZATION] = name
+            preferences[SPECIALIZATION1] = name
         }
     }
 
-    val getGraduation: Flow<String?> = context.dataStore.data
+    val getGraduation1: Flow<String?> = context.dataStore.data
         .map { preferences ->
-            preferences[GRADUATION] ?: ""
+            preferences[GRADUATION1] ?: ""
         }
 
-    suspend fun saveGraduation(name: String) {
+    suspend fun saveGraduation1(name: String) {
         context.dataStore.edit { preferences ->
-            preferences[GRADUATION] = name
+            preferences[GRADUATION1] = name
+        }
+    }
+
+    val getUniversity2: Flow<String?> = context.dataStore.data
+        .map { preferences ->
+            preferences[UNIVERSITY2] ?: ""
+        }
+
+    suspend fun saveUniversity2(name: String) {
+        context.dataStore.edit { preferences ->
+            preferences[UNIVERSITY2] = name
+        }
+    }
+
+    val getFieldOfStudy2: Flow<String?> = context.dataStore.data
+        .map { preferences ->
+            preferences[FIELDOFSTUDY2] ?: ""
+        }
+
+    suspend fun saveFieldOfStudy2(name: String) {
+        context.dataStore.edit { preferences ->
+            preferences[FIELDOFSTUDY2] = name
+        }
+    }
+
+    val getSpecialization2: Flow<String?> = context.dataStore.data
+        .map { preferences ->
+            preferences[SPECIALIZATION2] ?: ""
+        }
+
+    suspend fun saveSpecialization2(name: String) {
+        context.dataStore.edit { preferences ->
+            preferences[SPECIALIZATION2] = name
+        }
+    }
+
+    val getGraduation2: Flow<String?> = context.dataStore.data
+        .map { preferences ->
+            preferences[GRADUATION2] ?: ""
+        }
+
+    suspend fun saveGraduation2(name: String) {
+        context.dataStore.edit { preferences ->
+            preferences[GRADUATION2] = name
+        }
+    }
+
+    val getUniversity3: Flow<String?> = context.dataStore.data
+        .map { preferences ->
+            preferences[UNIVERSITY3] ?: ""
+        }
+
+    suspend fun saveUniversity3(name: String) {
+        context.dataStore.edit { preferences ->
+            preferences[UNIVERSITY3] = name
+        }
+    }
+
+    val getFieldOfStudy3: Flow<String?> = context.dataStore.data
+        .map { preferences ->
+            preferences[FIELDOFSTUDY3] ?: ""
+        }
+
+    suspend fun saveFieldOfStudy3(name: String) {
+        context.dataStore.edit { preferences ->
+            preferences[FIELDOFSTUDY3] = name
+        }
+    }
+
+    val getSpecialization3: Flow<String?> = context.dataStore.data
+        .map { preferences ->
+            preferences[SPECIALIZATION3] ?: ""
+        }
+
+    suspend fun saveSpecialization3(name: String) {
+        context.dataStore.edit { preferences ->
+            preferences[SPECIALIZATION3] = name
+        }
+    }
+
+    val getGraduation3: Flow<String?> = context.dataStore.data
+        .map { preferences ->
+            preferences[GRADUATION3] ?: ""
+        }
+
+    suspend fun saveGraduation3(name: String) {
+        context.dataStore.edit { preferences ->
+            preferences[GRADUATION3] = name
+        }
+    }
+
+    val getUniversity4: Flow<String?> = context.dataStore.data
+        .map { preferences ->
+            preferences[UNIVERSITY4] ?: ""
+        }
+
+    suspend fun saveUniversity4(name: String) {
+        context.dataStore.edit { preferences ->
+            preferences[UNIVERSITY4] = name
+        }
+    }
+
+    val getFieldOfStudy4: Flow<String?> = context.dataStore.data
+        .map { preferences ->
+            preferences[FIELDOFSTUDY4] ?: ""
+        }
+
+    suspend fun saveFieldOfStudy4(name: String) {
+        context.dataStore.edit { preferences ->
+            preferences[FIELDOFSTUDY4] = name
+        }
+    }
+
+    val getSpecialization4: Flow<String?> = context.dataStore.data
+        .map { preferences ->
+            preferences[SPECIALIZATION4] ?: ""
+        }
+
+    suspend fun saveSpecialization4(name: String) {
+        context.dataStore.edit { preferences ->
+            preferences[SPECIALIZATION4] = name
+        }
+    }
+
+    val getGraduation4: Flow<String?> = context.dataStore.data
+        .map { preferences ->
+            preferences[GRADUATION4] ?: ""
+        }
+
+    suspend fun saveGraduation4(name: String) {
+        context.dataStore.edit { preferences ->
+            preferences[GRADUATION4] = name
+        }
+    }
+
+    val getUniversity5: Flow<String?> = context.dataStore.data
+        .map { preferences ->
+            preferences[UNIVERSITY5] ?: ""
+        }
+
+    suspend fun saveUniversity5(name: String) {
+        context.dataStore.edit { preferences ->
+            preferences[UNIVERSITY5] = name
+        }
+    }
+
+    val getFieldOfStudy5: Flow<String?> = context.dataStore.data
+        .map { preferences ->
+            preferences[FIELDOFSTUDY5] ?: ""
+        }
+
+    suspend fun saveFieldOfStudy5(name: String) {
+        context.dataStore.edit { preferences ->
+            preferences[FIELDOFSTUDY5] = name
+        }
+    }
+
+    val getSpecialization5: Flow<String?> = context.dataStore.data
+        .map { preferences ->
+            preferences[SPECIALIZATION5] ?: ""
+        }
+
+    suspend fun saveSpecialization5(name: String) {
+        context.dataStore.edit { preferences ->
+            preferences[SPECIALIZATION5] = name
+        }
+    }
+
+    val getGraduation5: Flow<String?> = context.dataStore.data
+        .map { preferences ->
+            preferences[GRADUATION5] ?: ""
+        }
+
+    suspend fun saveGraduation5(name: String) {
+        context.dataStore.edit { preferences ->
+            preferences[GRADUATION5] = name
         }
     }
 
